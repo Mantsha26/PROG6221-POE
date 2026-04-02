@@ -92,8 +92,5 @@ public static class ConsoleUI
         WriteLineColored(msg, ConsoleColor.DarkGray);
         Console.ReadKey();
 
-
-
-        ERTYU
     }
 }

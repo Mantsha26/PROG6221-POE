@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.IO;
 using System.Media;
-using System.Speech.Synthesis;
+using System.Threading.Tasks;
+using System.Linq;
 
 public class ChatBot
 {
@@ -14,21 +15,76 @@ public class ChatBot
     public ChatBot()
     {
         responseSystem = new ResponseSystem();
+
+        // Play greeting audio automatically when chatbot starts
+        PlayVoiceGreeting();
     }
 
     public void PlayVoiceGreeting()
     {
-        try
+        // Try to locate and play a generated TTS file from common locations.
+        PlayMusic();
+    }
+
+    public static void PlayMusic()
+    {
+        string[] candidateDirs = new[]
         {
-            using (SoundPlayer player = new SoundPlayer("greeting.wav"))
+            AppDomain.CurrentDomain.BaseDirectory,
+            Environment.CurrentDirectory,
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources"),
+            Path.Combine(Environment.CurrentDirectory, "resources")
+        };
+
+        string[] patterns = new[] { "greeting.wav", "*.wav" };
+
+        string found = null;
+
+        foreach (var dir in candidateDirs)
+        {
+            try
             {
-                SpeechSynthesizer _ss = new SpeechSynthesizer();
-                _ss.Speak("Hi ! Welcome to the Cybersecurity Awareness Bot. I'm here to help you stay safe online");
+                if (!Directory.Exists(dir))
+                    continue;
+
+                foreach (var pattern in patterns)
+                {
+                    var file = Directory.EnumerateFiles(dir, pattern, SearchOption.TopDirectoryOnly).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(file))
+                    {
+                        found = file;
+                        break;
+                    }
+                }
+
+                if (found != null)
+                    break;
+            }
+            catch
+            {
+                // ignore inaccessible dirs
             }
         }
-        catch
+
+        if (found == null)
         {
-            ConsoleUI.DisplayWarning("Voice greeting not available.");
+            Console.WriteLine("Voice greeting file not found.");
+            return;
+        }
+
+        try
+        {
+            using (var player = new SoundPlayer(found))
+            {
+                player.Load();
+                player.Play();
+            }
+
+            Console.WriteLine($"Playing voice greeting: {Path.GetFileName(found)}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to play voice greeting: {ex.Message}");
         }
     }
 
@@ -55,6 +111,7 @@ public class ChatBot
         ConsoleUI.DrawLine();
 
         ConsoleUI.DisplayInfo("You can ask about:");
+
         Console.WriteLine("• Password Safety");
         Console.WriteLine("• Phishing Attacks");
         Console.WriteLine("• Safe Browsing");
@@ -107,3 +164,4 @@ public class ChatBot
         ConsoleUI.DrawLine('=');
     }
 }
+

@@ -9,13 +9,13 @@ class Program
         Console.Title = "Cybersecurity Awareness Bot";
         Console.OutputEncoding = Encoding.UTF8;
 
-        var bot = new ChatBot();
+        
 
         try
         {
             ConsoleUI.ClearWithHeader();
 
-            bot.PlayVoiceGreeting();
+            ChatBot bot = new ChatBot();
 
             await bot.GreetUser();
 
