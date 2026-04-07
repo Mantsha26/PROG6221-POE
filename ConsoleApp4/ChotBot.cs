@@ -28,7 +28,7 @@ public class ChatBot
 
     public static void PlayMusic()
     {
-        string[] candidateDirs = new[]
+        string[] candidateDirs = new[]// common locations to check for the greeting audio file
         {
             AppDomain.CurrentDomain.BaseDirectory,
             Environment.CurrentDirectory,
@@ -77,7 +77,7 @@ public class ChatBot
             using (var player = new SoundPlayer(found))
             {
                 player.Load();
-                player.Play();
+                player.PlaySync();
             }
 
             Console.WriteLine($"Playing voice greeting: {Path.GetFileName(found)}");
@@ -117,25 +117,26 @@ public class ChatBot
         Console.WriteLine("• Safe Browsing");
         Console.WriteLine("• Malware");
         Console.WriteLine("• Social Engineering");
+        Console.WriteLine("• Exit");
 
         ConsoleUI.DrawLine();
     }
 
     public async Task StartConversation()
     {
-        while (isRunning)
+        while (isRunning)// main conversation loop
         {
             ConsoleUI.WriteColored($"{currentUser.Name} > ", ConsoleColor.Cyan);
 
             string input = Console.ReadLine() ?? string.Empty;
 
-            if (string.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(input))// handle empty input
             {
                 ConsoleUI.DisplayWarning("Please type a question.");
                 continue;
             }
 
-            if (input.ToLower() == "exit")
+            if (input.ToLower() == "exit") // allow user to exit the chatbot
             {
                 await ExitBot();
                 break;
@@ -153,7 +154,7 @@ public class ChatBot
         }
     }
 
-    private async Task ExitBot()
+    private async Task ExitBot() //method to exit the chatbot gracefully
     {
         ConsoleUI.DrawLine('=');
 

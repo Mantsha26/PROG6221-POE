@@ -6,12 +6,12 @@ public class ResponseSystem
     private Dictionary<string, string[]> responses;
     private Random rand = new Random();
 
-    public string DefaultResponse { get; set; } =
+    public string DefaultResponse { get; set; } =// Default response when no keywords are matched
         "I didn’t quite understand that. Please ask a cybersecurity question like password safety, phishing, or safe browsing.";
 
     public ResponseSystem()
     {
-        responses = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+        responses = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)// Initialize the response dictionary with common user inputs and corresponding responses
         {
             ["hello"] = new[]
             {
@@ -81,14 +81,14 @@ public class ResponseSystem
         };
     }
 
-    public string GetResponse(string input)
+    public string GetResponse(string input)// Method to get a response based on user input
     {
-        if (string.IsNullOrWhiteSpace(input))
+        if (string.IsNullOrWhiteSpace(input))// Handle empty or whitespace input
         {
             return DefaultResponse;
         }
 
-        string cleaned = input.Trim().ToLower();
+        string cleaned = input.Trim().ToLower();// Clean the input for easier matching
 
         // Ignore programming code inputs
         if (cleaned.Contains("using ") ||
