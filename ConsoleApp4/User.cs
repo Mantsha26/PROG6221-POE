@@ -4,14 +4,14 @@ using System.Threading;
 public class User
 {
     public string Name { get; set; } = string.Empty;// User's name, can be set during greeting or later
-    public DateTime FirstInteraction { get; private set; }// Timestamp of the user's first interaction with the chatbot
+    public DateTime FirstInteraction { get; private set; }// store the time when the user first interacts with the chatbot
 
     private int _questionsAsked;
     public int QuestionsAsked => _questionsAsked;
 
-    public User()
+    public User()// Constructor initializes the first interaction time and question count
     {
-        FirstInteraction = DateTime.Now;// Initialize the first interaction time when the user object is created
+        FirstInteraction = DateTime.Now;
         _questionsAsked = 0;
     }
 
@@ -20,7 +20,7 @@ public class User
         Interlocked.Increment(ref _questionsAsked);
     }
 
-    public override string ToString()// Override ToString for easy debugging and display of user information
+    public override string ToString()// Override ToString for easy display of user information
     {
         return $"User: {Name}, Questions: {QuestionsAsked}";
     }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main(string[] args) 
     {
         Console.Title = "Cybersecurity Awareness Bot";
         Console.OutputEncoding = Encoding.UTF8;

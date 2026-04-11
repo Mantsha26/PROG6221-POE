@@ -88,7 +88,7 @@ public class ResponseSystem
             return DefaultResponse;
         }
 
-        string cleaned = input.Trim().ToLower();// Clean the input for easier matching
+        string cleaned = input.Trim().ToLower();// Clean the input remove spaces and convert to lowercase for easier matching
 
         // Ignore programming code inputs
         if (cleaned.Contains("using ") ||
@@ -103,14 +103,14 @@ public class ResponseSystem
         else if (responses.Count > 0)
         {
             // Use a while loop to iterate through response keys
-            var keys = new List<string>(responses.Keys);
+            var keys = new List<string>(responses.Keys);//Get the keys from the responses dictionary
             int i = 0;
 
-            while (i < keys.Count)
+            while (i < keys.Count)// Loop through the keys to find a match in the cleaned input
             {
                 string key = keys[i];
 
-                if (cleaned.Contains(key))
+                if (cleaned.Contains(key))// If a match is found, select a random response from the corresponding array and return it
                 {
                     var options = responses[key];
                     return options[rand.Next(options.Length)];
@@ -120,6 +120,6 @@ public class ResponseSystem
             }
         }
 
-        return DefaultResponse;
+        return DefaultResponse;// If no matches are found, return the default response
     }
 }

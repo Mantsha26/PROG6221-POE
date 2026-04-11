@@ -6,13 +6,13 @@ using System.Linq;
 
 public class ChatBot
 {
-    private User currentUser;
+    private User currentUser;//stores current user details and interaction history 
     private ResponseSystem responseSystem;
-    private bool isRunning = true;
+    private bool isRunning = true; // flag to control the main conversation loop
 
-    public string BotName { get; set; } = "CyberGuard";
+    public string BotName { get; set; } = "CyberGuard";// Name of the chatbot, can be customized
 
-    public ChatBot()
+    public ChatBot()//run when chatbot is initialized
     {
         responseSystem = new ResponseSystem();
 
@@ -88,7 +88,7 @@ public class ChatBot
         }
     }
 
-    public async Task GreetUser()
+    public async Task GreetUser()// method to greet the user and set up the initial interaction
     {
         Console.WriteLine();
 
@@ -110,7 +110,7 @@ public class ChatBot
 
         ConsoleUI.DrawLine();
 
-        ConsoleUI.DisplayInfo("You can ask about:");
+        ConsoleUI.DisplayInfo("You can ask about:");// Displaying available topics to the user
 
         Console.WriteLine("• Password Safety");
         Console.WriteLine("• Phishing Attacks");
@@ -142,11 +142,11 @@ public class ChatBot
                 break;
             }
 
-            currentUser.IncrementQuestionCount();
+            currentUser.IncrementQuestionCount();// tarck number of questions asked 
 
             string response = responseSystem.GetResponse(input);
 
-            ConsoleUI.WriteColored($"{BotName} > ", ConsoleColor.Magenta);
+            ConsoleUI.WriteColored($"{BotName} > ", ConsoleColor.Magenta);// display bot name in a different color for clarity
 
             await ConsoleUI.TypewriterEffect(response, 30);
 
