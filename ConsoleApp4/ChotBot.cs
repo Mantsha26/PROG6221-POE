@@ -40,11 +40,11 @@ public class ChatBot
 
         string found = null;
 
-        foreach (var dir in candidateDirs)
+        foreach (var dir in candidateDirs)// loop through candidate directories to find the greeting audio file
         {
             try
             {
-                if (!Directory.Exists(dir))
+                if (!Directory.Exists(dir))// skip if directory doesn't exist
                     continue;
 
                 foreach (var pattern in patterns)
@@ -62,7 +62,7 @@ public class ChatBot
             }
             catch
             {
-                // ignore inaccessible dirs
+                
             }
         }
 
