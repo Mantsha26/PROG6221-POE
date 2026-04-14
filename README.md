@@ -1,173 +1,146 @@
- Cybersecurity Awareness Chatbot
-Academic Project Documentation (Console Application)
+ Features
+Feature	Description
 
-1. Project Title
-Cybersecurity Awareness Chatbot (CyberGuard)
+Voice Greeting	Plays a .wav greeting audio file when the bot starts
 
-2. Project Description
-The Cybersecurity Awareness Chatbot (CyberGuard) is a console-based application developed using C# to promote user awareness of common cybersecurity threats and safe online practices.
-The chatbot interacts with users through a structured conversational interface and provides guidance on essential cybersecurity topics such as:
+User Personalization	Asks for user's name and uses it throughout the conversation
 
-Password safety
-Phishing attacks
-Safe browsing practices
-Malware threats
-Social engineering risks
+Keyword-Based Responses	Matches user input to predefined cybersecurity topics
 
-The system also enhances usability through audio greeting functionality and visual console interface formatting.
+Code Detection	Detects if user pastes code instead of asking questions
 
-3. Purpose of the Project
+Typing Effect	Simulates realistic typing for bot responses
 
-The purpose of this chatbot is to:
+Colored Console UI	Uses color-coded messages for better readability
 
-Educate users about cybersecurity risks
-Encourage safe digital behaviour
-Provide quick awareness-level responses
-Demonstrate implementation of object-oriented programming concepts
-Apply console-based user interaction techniques
-Support learning outcomes aligned with introductory cybersecurity awareness systems
-4. Technologies Used
+Question Tracking	Counts how many questions each user asks
 
-The chatbot was implemented using:
+Graceful Exit	Displays goodbye message when user types "exit"
 
-Technology	Purpose
-C#	Core programming language
-.NET Console Application	Application framework
-System.Media Library	Audio greeting playback
-Async / Await	Smooth response display
-Dictionary Collections	Keyword matching responses
-5. System Features
+📁 File Structure
 
-The chatbot provides the following functionality:
+CybersecurityBot/
 
-5.1 Voice Greeting Feature
+├── Program.cs              # Entry point - Main() method
 
-The system automatically plays a greeting audio file (greeting.wav) during startup to improve user engagement and accessibility.
+├── ChatBot.cs              # Core bot logic, conversation loop
 
-5.2 Interactive Console Interface
+├── ResponseSystem.cs       # Keyword matching & response generation
 
-The chatbot prompts the user to enter their name and then begins a conversation using a structured command interface.
+├── User.cs                 # User data model (name, question count)
 
-Example interaction:
+├── ConsoleUI.cs            # UI helpers (colors, typing effect, prompts)
 
-Enter your name: Mantsha
-Welcome Mantsha! I am CyberGuard.
-5.3 Keyword Recognition Engine
+└──  greeting.wav        # Optional audio file for voice greeting
 
-The chatbot identifies cybersecurity-related keywords entered by the user and returns relevant responses using dictionary-based matching.
 
-Example keywords supported:
+🔑 Keyword Response System
 
-password
-phishing
-safe browsing
-malware
-social engineering
-5.4 Typewriter Animation Effect
+Keyword	Response Topic
 
-Responses are displayed using asynchronous character-by-character rendering to simulate a conversational chatbot experience.
+hello, hi	Greetings
 
-5.5 User Interaction Tracking
+how are you	Bot status
 
-The chatbot records:
+purpose	Bot's mission
 
-user name
-number of questions asked
-session start time
+password	Strong password tips
 
-This supports structured interaction monitoring during runtime.
+phishing	Email safety
 
-5.6 Input Validation
+safe browsing	HTTPS, safe downloads
 
-The chatbot prevents:
+malware	Harmful software protection
 
-empty inputs
-invalid commands
-programming code insertion
+social engineering	Confidential data safety
 
-Example response:
+thanks	Appreciation reply
 
-It looks like you entered programming code. Please ask a cybersecurity question instead.
-6. System Architecture
+help	Available topics list
 
-The application follows an object-oriented modular structure consisting of five primary classes:
+🎯 Class Responsibilities
 
 Class	Responsibility
-Program.cs	Application entry point
-ChatBot.cs	Conversation control logic
-User.cs	Stores user information
-ResponseSystem.cs	Generates responses
-ConsoleUI.cs	Handles interface formatting
 
-This modular structure improves:
+Program-	Entry point, exception handling, console setup
 
-maintainability
-readability
-scalability
-7. Cybersecurity Topics Covered
+ChatBot-	Main conversation flow, user greeting, exit logic, audio playback
 
-The chatbot provides awareness-level guidance on the following security concepts:
+ResponseSystem-	Keyword matching, random response selection, code detection
 
-Password Safety
+User-	Stores name, first interaction time, question count (thread-safe)
 
-Users are advised to create strong passwords containing:
+ConsoleUI-	All console output: colors, typing effect, ASCII art, input prompts
 
-uppercase letters
-lowercase letters
-numbers
-symbols
-Phishing Awareness
+ How to Run
+ 
+Prerequisites
+.NET SDK (6.0 or higher)
 
-Users are warned about suspicious:
+Windows (for System.Media.SoundPlayer audio support)
 
-emails
-links
-attachments
-impersonation attempts
-Safe Browsing Practices
+Steps
 
-The chatbot encourages users to:
+# 1. Clone or create project directory
 
-verify HTTPS website connections
-avoid unsafe downloads
-avoid suspicious links
-Malware Protection
+mkdir CybersecurityBot
 
-Users are advised to:
+cd CybersecurityBot
 
-install antivirus software
-update systems regularly
-avoid unknown downloads
-Social Engineering Awareness
+# 2. Create console application
 
-The chatbot explains risks involving manipulation techniques used to obtain confidential information from users.
+dotnet new console
 
-8. Error Handling Implementation
+# 3. Add all .cs files (Program.cs, ChatBot.cs, ResponseSystem.cs, User.cs, ConsoleUI.cs)
 
-The chatbot includes structured exception handling to prevent system crashes during execution.
+# 4. (Optional) Add greeting.wav to resources folder
 
-Example:
+# 5. Build and run
 
-try
-{
-    chatbot execution
-}
-catch (Exception ex)
-{
-    error message display
-}
+dotnet build
 
-This improves reliability and user experience.
+dotnet run
 
-9. Limitations of the System
+Sample Interaction
 
-Although effective for awareness-level interaction, the chatbot has the following limitations:
+text
 
-keyword-based responses only
-no machine learning integration
-no persistent storage of conversations
-no graphical interface
-limited topic expansion capability
+Enter your name: Alice
+
+Welcome Alice! I am CyberGuard, your Cybersecurity Awareness Assistant.
+
+
+i You can ask about:
+
+• Password Safety
+
+• Phishing Attacks
+
+• Safe Browsing
+
+• Malware
+
+• Social Engineering
+
+• Exit
+
+
+
+Alice > What is phishing?
+
+CyberGuard > Phishing emails try to trick you into giving personal information.
+
+Alice > How do I make strong passwords?
+
+CyberGuard > Use strong passwords with at least 12 characters including letters, numbers, and symbols.
+
+Alice > exit
+
+==================================================
+
+Goodbye Alice! Stay safe online!
+
+==================================================
 
  Reference List (Harvard Style)
 
