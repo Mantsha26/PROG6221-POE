@@ -17,7 +17,7 @@ Question Tracking	Counts how many questions each user asks
 
 Graceful Exit	Displays goodbye message when user types "exit"
 
-📁 File Structure
+ File Structure
 
 CybersecurityBot/
 
@@ -34,7 +34,7 @@ CybersecurityBot/
 └──  greeting.wav        # Optional audio file for voice greeting
 
 
-🔑 Keyword Response System
+ Keyword Response System
 
 Keyword	Response Topic
 
@@ -58,7 +58,7 @@ thanks	Appreciation reply
 
 help	Available topics list
 
-🎯 Class Responsibilities
+ Class Responsibilities
 
 Class	Responsibility
 
@@ -81,21 +81,21 @@ Windows (for System.Media.SoundPlayer audio support)
 
 Steps
 
-# 1. Clone or create project directory
+ 1. Clone or create project directory
 
 mkdir CybersecurityBot
 
 cd CybersecurityBot
 
-# 2. Create console application
+ 2. Create console application
 
 dotnet new console
 
-# 3. Add all .cs files (Program.cs, ChatBot.cs, ResponseSystem.cs, User.cs, ConsoleUI.cs)
+ 3. Add all .cs files (Program.cs, ChatBot.cs, ResponseSystem.cs, User.cs, ConsoleUI.cs)
 
-# 4. (Optional) Add greeting.wav to resources folder
+ 4. (Optional) Add greeting.wav to resources folder
 
-# 5. Build and run
+ 5. Build and run
 
 dotnet build
 
